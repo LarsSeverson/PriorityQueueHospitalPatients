@@ -105,6 +105,7 @@ public class Patients {
                 return 2;
             }
             default -> {
+                this.fullUNOS = "Status 7";
                 // exit out loop
             }
         }
@@ -119,6 +120,7 @@ public class Patients {
 
         return currentYear - patientYear;
     }
+
     @Override
     public String toString(){
         return
@@ -135,6 +137,7 @@ public class Patients {
                         "\nPhone Number (2nd Preference): " + this.phone2 +
                         "\nEmail address: " + this.email +
                         "\nUNOS Status: " + this.fullUNOS +
-                        "\nData listed on " + ANSI_RED + this.fullUNOS + ANSI_RESET +": " + this.dateListed;
+                        "\nData listed on " + ANSI_RED + this.fullUNOS + ANSI_RESET +": "
+                                + this.dateListed + "\n";
     }
 }

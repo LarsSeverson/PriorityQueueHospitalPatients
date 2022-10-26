@@ -7,6 +7,7 @@ public class Main {
         hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile.txt"))));
         insertRecords(new BufferedReader(new FileReader("src/inputFile.txt")));
         System.out.println(hospitalQueue.peek());
+        hospitalQueue.display();
     }
     private static void insertRecords(BufferedReader fileName){
         String line;
