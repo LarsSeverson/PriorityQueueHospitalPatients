@@ -122,8 +122,8 @@ public class Patients {
     @Override
     public String toString(){
         return
-                        "The patient detail with the highest priority is as follows:\n" +
-                        "Patient's first name: " + this.firstName +
+                        "\nThe patient detail with the highest priority is as follows:" +
+                        "\nPatient's first name: " + this.firstName +
                         "\nPatient's last name: " + this.lastName +
                         "\nDate of birth of the patient: " + this.fullDOB +
                         "\nAddress: " + this.address +
