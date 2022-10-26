@@ -2,9 +2,15 @@ import java.io.*;
 
 public class Main {
     private static int fileSize = -1;
-    private static PriorityQueue<String> hospitalQueue;
+    private static PriorityQueue<Object> hospitalQueue;
     public static void main(String[] args) throws FileNotFoundException {
-        BufferedReader theFile = new BufferedReader(new InputStreamReader((new FileInputStream("inputFile.txt"))));
+        BufferedReader theFile = new BufferedReader(new FileReader("inputFile.txt"));
+        try{
+            theFile.readLine();
+        }
+        catch(IOException e){
+
+        }
         hospitalQueue = new PriorityQueue<>(getSize(theFile));
         insertRecords(theFile);
     }
@@ -12,6 +18,7 @@ public class Main {
         String line;
         int i = 0;
         try{
+            System.out.println(fileName.readLine());
             while((line = fileName.readLine()) !=  null){
                 if (i > 0){
                     String[] info = line.split(";");

@@ -11,7 +11,7 @@ public class Patients {
     private String phone2;
     private String email;
     private String dateListed;
-    private String UNOS_Status;
+    private int UNOS_Status;
     private String dateOfBirth;
 
     public Patients(String firstName, String lastName, String address,
@@ -29,7 +29,64 @@ public class Patients {
         this.phone2 = phone2;
         this.email = email;
         this.dateListed = dateListed;
-        this.UNOS_Status = UNOS_Status;
+        this.UNOS_Status = setUNOS_Status(UNOS_Status);
         this.dateOfBirth = dateOfBirth;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public String getCity() {
+        return city;
+    }
+    public String getCounty() {
+        return county;
+    }
+    public String getState() {
+        return state;
+    }
+    public String getZip() {
+        return zip;
+    }
+    public String getPhone1() {
+        return phone1;
+    }
+    public String getPhone2() {
+        return phone2;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getDateListed() {
+        return dateListed;
+    }
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public int getUNOS_Status() {
+        return UNOS_Status;
+    }
+
+    private int setUNOS_Status(String unos){
+        switch(unos.toUpperCase()){
+            case "STATUS 1A" -> {
+                return 4;
+            }
+            case "STATUS 1B" ->{
+                return 3;
+            }
+            case "STATUS 2" ->{
+                return 2;
+            }
+            default -> {
+                // exit out loop
+            }
+        }
+        return 1;
     }
 }
