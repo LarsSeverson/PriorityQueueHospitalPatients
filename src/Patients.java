@@ -1,4 +1,12 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Patients {
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = "\u001B[0m";
+
     private String firstName;
     private String lastName;
     private String address;
@@ -11,8 +19,11 @@ public class Patients {
     private String phone2;
     private String email;
     private String dateListed;
+    private String fullDOB;
+    private String fullUNOS;
+
     private int UNOS_Status;
-    private String dateOfBirth;
+    private int dateOfBirth;
 
     public Patients(String firstName, String lastName, String address,
                      String city, String county, String state, String zip,
@@ -29,8 +40,12 @@ public class Patients {
         this.phone2 = phone2;
         this.email = email;
         this.dateListed = dateListed;
+
+        this.fullUNOS = UNOS_Status;
         this.UNOS_Status = setUNOS_Status(UNOS_Status);
-        this.dateOfBirth = dateOfBirth;
+
+        this.fullDOB = dateOfBirth;
+        this.dateOfBirth = setDateOfBirth(dateOfBirth);
     }
     public String getFirstName() {
         return firstName;
@@ -65,7 +80,13 @@ public class Patients {
     public String getDateListed() {
         return dateListed;
     }
-    public String getDateOfBirth() {
+    public String getFullDOB() {
+        return fullDOB;
+    }
+    public String getFullUNOS() {
+        return fullUNOS;
+    }
+    public int getDateOfBirth() {
         return dateOfBirth;
     }
     public int getUNOS_Status() {
@@ -88,5 +109,32 @@ public class Patients {
             }
         }
         return 1;
+    }
+    private int setDateOfBirth(String dateOfBirth){
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+
+        int currentYear = Integer.parseInt(dateFormat.format(date));
+        int patientYear = Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
+
+        return currentYear - patientYear;
+    }
+    @Override
+    public String toString(){
+        return
+                        "The patient detail with the highest priority is as follows:\n" +
+                        "Patient's first name: " + this.firstName +
+                        "\nPatient's last name: " + this.lastName +
+                        "\nDate of birth of the patient: " + this.fullDOB +
+                        "\nAddress: " + this.address +
+                        "\nCity: " + this.city +
+                        "\nCounty: " + this.county +
+                        "\nState: " + this.state +
+                        "\nZip code: " + this.zip +
+                        "\nPhone Number (1st Preference): " + this.phone1 +
+                        "\nPhone Number (2nd Preference): " + this.phone2 +
+                        "\nEmail address: " + this.email +
+                        "\nUNOS Status: " + this.fullUNOS +
+                        "\nData listed on " + ANSI_RED + this.fullUNOS + ANSI_RESET +": " + this.dateListed;
     }
 }

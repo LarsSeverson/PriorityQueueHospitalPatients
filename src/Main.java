@@ -4,21 +4,14 @@ public class Main {
     private static int fileSize = -1;
     private static PriorityQueue<Object> hospitalQueue;
     public static void main(String[] args) throws FileNotFoundException {
-        BufferedReader theFile = new BufferedReader(new FileReader("inputFile.txt"));
-        try{
-            theFile.readLine();
-        }
-        catch(IOException e){
-
-        }
-        hospitalQueue = new PriorityQueue<>(getSize(theFile));
-        insertRecords(theFile);
+        hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
+        insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
+        System.out.println(hospitalQueue.peek());
     }
     private static void insertRecords(BufferedReader fileName){
         String line;
         int i = 0;
         try{
-            System.out.println(fileName.readLine());
             while((line = fileName.readLine()) !=  null){
                 if (i > 0){
                     String[] info = line.split(";");
