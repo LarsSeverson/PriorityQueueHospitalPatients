@@ -115,12 +115,17 @@ public class Patients {
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
 
-        int currentYear = Integer.parseInt(dateFormat.format(date));
-        int patientYear = Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
+        int currentYear = Integer.parseInt(dateFormat.format(date).substring(dateFormat.format(date).length()-4));
+        int patientYear = exact(new SimpleDateFormat("MMdd").format(date), dateOfBirth.replaceAll("/", ""));
+         patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
 
         return currentYear - patientYear;
     }
-
+    private int exact(String monthDay, String DOB){
+        int patient = Integer.parseInt(DOB.substring(DOB.length() - 5));
+        int current = Integer.parseInt(monthDay);
+        return patient < current ? 0 : -1;
+    }
     @Override
     public String toString(){
         return

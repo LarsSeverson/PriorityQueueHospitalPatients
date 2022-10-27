@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     private static int fileSize = -1;
@@ -7,10 +8,13 @@ public class Main {
         hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
         insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
 
+        hospitalQueue.display();
         hospitalQueue.peek();
         hospitalQueue.nextPatient();
         hospitalQueue.nextPatient();
         hospitalQueue.peek();
+
+        hospitalQueue.find(findPatient());
     }
     private static void insertRecords(BufferedReader fileName){
         String line;
@@ -43,5 +47,25 @@ public class Main {
             e.printStackTrace();
         }
         return fileSize;
+    }
+    private static Patients findPatient(){
+        System.out.println("Please enter the patient information to remove from the queue:");
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("\nPlease enter patient’s first name: ");
+        String name = input.nextLine();
+        System.out.print("\nPlease enter patient’s last name: ");
+        String last = input.nextLine();
+        System.out.print("\nPlease enter patient’s data of birth: ");
+        System.out.print("\nPlease enter patient’s address: ");
+        System.out.print("\nPlease enter patient’s city: ");
+        System.out.print("\nPlease enter patient’s county: ");
+        System.out.print("\nPlease enter patient’s state: ");
+        System.out.print("\nPlease enter patient’s phone number (1st Preference): ");
+        System.out.print("\nPlease enter patient’s phone number (2nd Preference): ");
+        System.out.print("\nPlease enter patient’s email address: ");
+        System.out.print("\nPlease update the UNOS Status: ");
+
+        return null;
     }
 }

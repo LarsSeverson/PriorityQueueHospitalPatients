@@ -13,6 +13,9 @@ public class PriorityQueue<T> {
         }
         System.out.println();
     }
+    public int size(){
+        return size;
+    }
     public void insert(Patients record){
         heap[++size] = record;
         shiftUp(size);
@@ -28,7 +31,15 @@ public class PriorityQueue<T> {
         shiftDown(0);
         return result;
     }
-
+    public Patients removePatient(int patientLocation){
+        Patients result = heap[patientLocation];
+        heap[patientLocation] = heap[size--];
+        shiftDown(patientLocation);
+        return result;
+    }
+    public boolean find(Patients check){
+        return false;
+    }
     private int getParent(int location){
         return (location - 1) / 2;
     }
