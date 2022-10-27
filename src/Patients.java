@@ -92,6 +92,9 @@ public class Patients {
     public int getUNOS_Status() {
         return UNOS_Status;
     }
+    public void setUNOS_Status(int UNOS_Status) {
+        this.UNOS_Status = UNOS_Status;
+    }
 
     private int setUNOS_Status(String unos){
         switch(unos.toUpperCase()){
@@ -117,19 +120,18 @@ public class Patients {
 
         int currentYear = Integer.parseInt(dateFormat.format(date).substring(dateFormat.format(date).length()-4));
         int patientYear = exact(new SimpleDateFormat("MMdd").format(date), dateOfBirth.replaceAll("/", ""));
-         patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
+        patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
 
         return currentYear - patientYear;
     }
     private int exact(String monthDay, String DOB){
         int patient = Integer.parseInt(DOB.substring(DOB.length() - 5));
         int current = Integer.parseInt(monthDay);
-        return patient < current ? 0 : -1;
+        return patient < current ? 1 : 0;
     }
     @Override
     public String toString(){
         return
-                        "\nThe patient detail with the highest priority is as follows:" +
                         "\nPatient's first name: " + this.firstName +
                         "\nPatient's last name: " + this.lastName +
                         "\nDate of birth of the patient: " + this.fullDOB +

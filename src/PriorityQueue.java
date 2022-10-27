@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class PriorityQueue<T> {
     private int size;
     private final Patients[] heap;
@@ -5,23 +7,15 @@ public class PriorityQueue<T> {
         this.size = -1;
         heap = new Patients[size];
     }
-    public void display(){
-        System.out.println();
-        int i = 0;
-        while (i <= size){
-            System.out.println("status: "+ heap[i].getUNOS_Status() + " age: " + heap[i++].getDateOfBirth());
-        }
-        System.out.println();
-    }
     public int size(){
-        return size;
+        return size + 1;
     }
     public void insert(Patients record){
         heap[++size] = record;
         shiftUp(size);
     }
     public String peek(){
-        System.out.println(heap[0].toString());
+        System.out.println(heap[0]);
         return heap[0].toString();
     }
 
@@ -31,14 +25,41 @@ public class PriorityQueue<T> {
         shiftDown(0);
         return result;
     }
-    public Patients removePatient(int patientLocation){
-        Patients result = heap[patientLocation];
-        heap[patientLocation] = heap[size--];
-        shiftDown(patientLocation);
-        return result;
+    public void removePatient(int patientLocation){
+        if (patientLocation == -1){
+            System.out.println("\nThe requested patient's record is not found.");
+            return;
+        }
+        heap[patientLocation].setUNOS_Status(heap[0].getUNOS_Status() + 1);
+        shiftUp(patientLocation);
+        nextPatient();
+        System.out.println("\nThe requested patient's record has been removed from the queue.");
     }
-    public boolean find(Patients check){
-        return false;
+    public int find(Patients check){
+        int it = 0;
+        int location = -1;
+        for(Patients current : heap){
+            if(check.getFirstName().equals(current.getFirstName())
+            && check.getLastName().equals(current.getLastName())
+            && check.getFullDOB().equals(current.getFullDOB())
+            && check.getAddress().equals(current.getAddress())
+            && check.getCity().equals(current.getCity())
+            && check.getCounty().equals(current.getCounty())
+            && check.getState().equals(current.getState())
+            && check.getZip().equals(current.getZip())
+            && check.getPhone1().equals(current.getPhone1())
+            && check.getPhone2().equals(current.getPhone2())
+            && check.getEmail().equals(current.getEmail())
+            && check.getFullUNOS().equals(current.getFullUNOS())){
+                location = it;
+                break;
+            }
+            if(it == size){
+                break;
+            }
+            it++;
+        }
+        return location;
     }
     private int getParent(int location){
         return (location - 1) / 2;

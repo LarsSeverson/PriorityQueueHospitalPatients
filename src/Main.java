@@ -5,16 +5,46 @@ public class Main {
     private static int fileSize = -1;
     private static PriorityQueue<Object> hospitalQueue;
     public static void main(String[] args) throws FileNotFoundException {
-        hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
-        insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
+        Scanner input = new Scanner(System.in);
+        System.out.println("\t{Hospital Record Priority Queue}\n");
+        while(true){
+            System.out.println("1. insert" +
+                    "\n2. peek" +
+                    "\n3. nextPatient" +
+                    "\n4. removePatient" +
+                    "\n5. size" +
+                    "\n6. exit");
+            System.out.print("\nEnter a number: ");
+            switch(input.nextLine()){
+                case "1":
+                    hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
+                    insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
+                    System.out.println("Input file is read successfully.");
+                    break;
+                case "2":
+                    System.out.println("The patient detail with the highest priority is as follows:");
+                    hospitalQueue.peek();
+                    break;
+                case "3":
+                    System.out.println("The patient removed from the heap is as follows:");
+                    hospitalQueue.peek();
+                    hospitalQueue.nextPatient();
+                    break;
+                case "4":
+                    hospitalQueue.removePatient(hospitalQueue.find(getPatientInfo()));
+                    break;
+                case "5":
+                    System.out.println("Number of record in the database: " + hospitalQueue.size());
+                    break;
+                case "6":
+                    System.exit(1);
+                default:
+                    System.out.println("Not a valid option.");
+                    break;
+            }
 
-        hospitalQueue.display();
-        hospitalQueue.peek();
-        hospitalQueue.nextPatient();
-        hospitalQueue.nextPatient();
-        hospitalQueue.peek();
+        }
 
-        hospitalQueue.find(findPatient());
     }
     private static void insertRecords(BufferedReader fileName){
         String line;
@@ -48,24 +78,35 @@ public class Main {
         }
         return fileSize;
     }
-    private static Patients findPatient(){
+    private static Patients getPatientInfo(){
         System.out.println("Please enter the patient information to remove from the queue:");
         Scanner input = new Scanner(System.in);
 
         System.out.print("\nPlease enter patient’s first name: ");
         String name = input.nextLine();
-        System.out.print("\nPlease enter patient’s last name: ");
+        System.out.print("Please enter patient’s last name: ");
         String last = input.nextLine();
-        System.out.print("\nPlease enter patient’s data of birth: ");
-        System.out.print("\nPlease enter patient’s address: ");
-        System.out.print("\nPlease enter patient’s city: ");
-        System.out.print("\nPlease enter patient’s county: ");
-        System.out.print("\nPlease enter patient’s state: ");
-        System.out.print("\nPlease enter patient’s phone number (1st Preference): ");
-        System.out.print("\nPlease enter patient’s phone number (2nd Preference): ");
-        System.out.print("\nPlease enter patient’s email address: ");
-        System.out.print("\nPlease update the UNOS Status: ");
+        System.out.print("Please enter patient’s data of birth: ");
+        String dob = input.nextLine();
+        System.out.print("Please enter patient’s address: ");
+        String address = input.nextLine();
+        System.out.print("Please enter patient’s city: ");
+        String city = input.nextLine();
+        System.out.print("Please enter patient’s county: ");
+        String county = input.nextLine();
+        System.out.print("Please enter patient’s state: ");
+        String state = input.nextLine();
+        System.out.print("Please enter patient’s zip code: ");
+        String zip = input.nextLine();
+        System.out.print("Please enter patient’s phone number (1st Preference): ");
+        String phone1 = input.nextLine();
+        System.out.print("Please enter patient’s phone number (2nd Preference): ");
+        String phone2 = input.nextLine();
+        System.out.print("Please enter patient’s email address: ");
+        String email = input.nextLine();
+        System.out.print("Please update the UNOS Status: ");
+        String unos = input.nextLine();
 
-        return null;
+        return new Patients(name, last, address, city, county, state, zip, phone1, phone2, email, "", unos, dob);
     }
 }
