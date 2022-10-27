@@ -4,10 +4,13 @@ public class Main {
     private static int fileSize = -1;
     private static PriorityQueue<Object> hospitalQueue;
     public static void main(String[] args) throws FileNotFoundException {
-        hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile.txt"))));
-        insertRecords(new BufferedReader(new FileReader("src/inputFile.txt")));
-        System.out.println(hospitalQueue.peek());
-        hospitalQueue.display();
+        hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
+        insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
+
+        hospitalQueue.peek();
+        hospitalQueue.nextPatient();
+        hospitalQueue.nextPatient();
+        hospitalQueue.peek();
     }
     private static void insertRecords(BufferedReader fileName){
         String line;
