@@ -1,5 +1,9 @@
 import java.io.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Main {
     private static int fileSize = -1;
@@ -13,7 +17,8 @@ public class Main {
                     "\n3. nextPatient" +
                     "\n4. removePatient" +
                     "\n5. size" +
-                    "\n6. exit");
+                    "\n6. updatePriority" +
+                    "\n7. exit");
             System.out.print("\nEnter a number: ");
             switch(input.nextLine()){
                 case "1":
@@ -23,20 +28,24 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("The patient detail with the highest priority is as follows:");
-                    hospitalQueue.peek();
+                    System.out.println(hospitalQueue.peek());
                     break;
                 case "3":
                     System.out.println("The patient removed from the heap is as follows:");
-                    hospitalQueue.peek();
-                    hospitalQueue.nextPatient();
+                    System.out.println(hospitalQueue.nextPatient());
                     break;
                 case "4":
+                    System.out.println("Please enter the patient information to remove from the queue:");
                     hospitalQueue.removePatient(hospitalQueue.find(getPatientInfo()));
                     break;
                 case "5":
                     System.out.println("Number of record in the database: " + hospitalQueue.size());
                     break;
                 case "6":
+                    System.out.println("Please enter the patient information to change UNOS status:");
+                    hospitalQueue.updatePriority(getPatientInfo());
+                    break;
+                case "7":
                     System.exit(1);
                 default:
                     System.out.println("Not a valid option.");
@@ -79,7 +88,6 @@ public class Main {
         return fileSize;
     }
     private static Patients getPatientInfo(){
-        System.out.println("Please enter the patient information to remove from the queue:");
         Scanner input = new Scanner(System.in);
 
         System.out.print("\nPlease enter patient’s first name: ");
@@ -107,6 +115,9 @@ public class Main {
         System.out.print("Please update the UNOS Status: ");
         String unos = input.nextLine();
 
-        return new Patients(name, last, address, city, county, state, zip, phone1, phone2, email, "", unos, dob);
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+        return new Patients(name, last, address, city, county, state, zip, phone1, phone2, email, dateFormat.format(date), unos, dob);
     }
 }

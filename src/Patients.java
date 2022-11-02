@@ -7,23 +7,25 @@ public class Patients {
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_RESET = "\u001B[0m";
 
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String county;
-    private String state;
+    private final String firstName;
+    private final String lastName;
+    private final String address;
+    private final String city;
+    private final String county;
+    private final String state;
     // could be int
-    private String zip;
-    private String phone1;
-    private String phone2;
-    private String email;
-    private String dateListed;
+    private final String zip;
+    private final String phone1;
+    private final String phone2;
+    private final String email;
+    private final String dateListed;
     private String fullDOB;
     private String fullUNOS;
 
     private int UNOS_Status;
-    private int dateOfBirth;
+    private final int dateOfBirth;
+
+    private final HistoryQueue history;
 
     public Patients(String firstName, String lastName, String address,
                      String city, String county, String state, String zip,
@@ -39,14 +41,18 @@ public class Patients {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.email = email;
-        this.dateListed = dateListed;
 
+        this.history = new HistoryQueue();
+        this.dateListed = dateListed;
         this.fullUNOS = UNOS_Status;
-        this.UNOS_Status = setUNOS_Status(UNOS_Status);
+        this.UNOS_Status = setUNOS(UNOS_Status);
+        addRecord(this.dateListed, fullUNOS);
 
         this.fullDOB = dateOfBirth;
         this.dateOfBirth = setDateOfBirth(dateOfBirth);
+
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -92,28 +98,37 @@ public class Patients {
     public int getUNOS_Status() {
         return UNOS_Status;
     }
-    public void setUNOS_Status(int UNOS_Status) {
+    // In case we ever need to directly change the UNOS status for comparison (see removePatient())
+    public void setUNOSbyInt(int UNOS_Status) {
         this.UNOS_Status = UNOS_Status;
     }
-
-    private int setUNOS_Status(String unos){
+    public void setFullUNOS(String fullUNOS) {
+        this.fullUNOS = fullUNOS;
+    }
+    public int setUNOS(String unos){
         switch(unos.toUpperCase()){
             case "STATUS 1A" -> {
+                setFullUNOS("Status 1A");
                 return 4;
             }
             case "STATUS 1B" ->{
+                setFullUNOS("Status 1B");
                 return 3;
             }
             case "STATUS 2" ->{
+                setFullUNOS("Status 2");
                 return 2;
             }
             default -> {
-                this.fullUNOS = "Status 7";
-                // exit out loop
+                setFullUNOS("Status 7");
+                return 1;
             }
         }
-        return 1;
     }
+    public void addRecord(String dateListed, String status){
+        history.add(status, dateListed);
+    }
+
     private int setDateOfBirth(String dateOfBirth){
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
@@ -131,6 +146,7 @@ public class Patients {
     }
     @Override
     public String toString(){
+
         return
                         "\nPatient's first name: " + this.firstName +
                         "\nPatient's last name: " + this.lastName +
@@ -144,7 +160,7 @@ public class Patients {
                         "\nPhone Number (2nd Preference): " + this.phone2 +
                         "\nEmail address: " + this.email +
                         "\nUNOS Status: " + this.fullUNOS +
-                        "\nData listed on " + ANSI_RED + this.fullUNOS + ANSI_RESET +": "
-                                + this.dateListed + "\n";
+                            "\n" + this.history.toString();
     }
+
 }
