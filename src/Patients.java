@@ -106,16 +106,16 @@ public class Patients {
         this.fullUNOS = fullUNOS;
     }
     public int setUNOS(String unos){
-        switch(unos.toUpperCase()){
+        switch (unos.toUpperCase()) {
             case "STATUS 1A" -> {
                 setFullUNOS("Status 1A");
                 return 4;
             }
-            case "STATUS 1B" ->{
+            case "STATUS 1B" -> {
                 setFullUNOS("Status 1B");
                 return 3;
             }
-            case "STATUS 2" ->{
+            case "STATUS 2" -> {
                 setFullUNOS("Status 2");
                 return 2;
             }
@@ -132,7 +132,10 @@ public class Patients {
     private int setDateOfBirth(String dateOfBirth){
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
-
+        // more checks could be implemented like if the patientYear is an int
+        if (dateOfBirth.length() < 4){
+            return 100;
+        }
         int currentYear = Integer.parseInt(dateFormat.format(date).substring(dateFormat.format(date).length()-4));
         int patientYear = exact(new SimpleDateFormat("MMdd").format(date), dateOfBirth.replaceAll("/", ""));
         patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));

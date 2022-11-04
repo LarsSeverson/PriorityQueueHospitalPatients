@@ -20,36 +20,31 @@ public class Main {
                     "\n6. updatePriority" +
                     "\n7. exit");
             System.out.print("\nEnter a number: ");
-            switch(input.nextLine()){
-                case "1":
+            switch (input.nextLine()) {
+                case "1" -> {
                     hospitalQueue = new PriorityQueue<>(getSize(new BufferedReader(new FileReader("src/inputFile2.txt"))));
                     insertRecords(new BufferedReader(new FileReader("src/inputFile2.txt")));
                     System.out.println("Input file is read successfully.");
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     System.out.println("The patient detail with the highest priority is as follows:");
                     System.out.println(hospitalQueue.peek());
-                    break;
-                case "3":
+                }
+                case "3" -> {
                     System.out.println("The patient removed from the heap is as follows:");
                     System.out.println(hospitalQueue.nextPatient());
-                    break;
-                case "4":
+                }
+                case "4" -> {
                     System.out.println("Please enter the patient information to remove from the queue:");
                     hospitalQueue.removePatient(hospitalQueue.find(getPatientInfo()));
-                    break;
-                case "5":
-                    System.out.println("Number of record in the database: " + hospitalQueue.size());
-                    break;
-                case "6":
+                }
+                case "5" -> System.out.println("Number of record in the database: " + hospitalQueue.size());
+                case "6" -> {
                     System.out.println("Please enter the patient information to change UNOS status:");
                     hospitalQueue.updatePriority(getPatientInfo());
-                    break;
-                case "7":
-                    System.exit(1);
-                default:
-                    System.out.println("Not a valid option.");
-                    break;
+                }
+                case "7" -> System.exit(1);
+                default -> System.out.println("Not a valid option.");
             }
 
         }
