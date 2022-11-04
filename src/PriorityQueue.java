@@ -77,10 +77,11 @@ public class PriorityQueue<T> {
     }
     public String nextPatient(){
         Patients result = null;
-        if (size != -1){
+        if (size >= 0){
             result = heap[0];
-            heap[0] = heap[size--];
+            heap[0] = heap[size];
             shiftDown(0);
+            size--;
         }
         return result == null ? "The queue is empty" : result.toString();
     }
@@ -120,8 +121,8 @@ public class PriorityQueue<T> {
         if(isLeaf(location)){
             return;
         }
-        if (heap[location].getUNOS_Status() < heap[getLeft(location)].getUNOS_Status()
-        || heap[location].getUNOS_Status() < heap[getRight(location)].getUNOS_Status()){
+        if (heap[location].getUNOS_Status() <= heap[getLeft(location)].getUNOS_Status()
+        || heap[location].getUNOS_Status() <= heap[getRight(location)].getUNOS_Status()){
             // First priorities
             if (heap[getLeft(location)].getUNOS_Status() > heap[getRight(location)].getUNOS_Status()){
                 swap(getLeft(location), location);
@@ -150,6 +151,6 @@ public class PriorityQueue<T> {
         heap[current] = temp;
     }
     private boolean isLeaf(int location){
-        return (location > (size / 2) && location <= size);
+        return (location >= (size / 2) && location <= size) || size == -1;
     }
 }

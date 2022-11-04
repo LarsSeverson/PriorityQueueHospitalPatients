@@ -19,7 +19,7 @@ public class Patients {
     private final String phone2;
     private final String email;
     private final String dateListed;
-    private String fullDOB;
+    private final String fullDOB;
     private String fullUNOS;
 
     private int UNOS_Status;
@@ -50,7 +50,6 @@ public class Patients {
 
         this.fullDOB = dateOfBirth;
         this.dateOfBirth = setDateOfBirth(dateOfBirth);
-
     }
 
     public String getFirstName() {
@@ -138,14 +137,23 @@ public class Patients {
         }
         int currentYear = Integer.parseInt(dateFormat.format(date).substring(dateFormat.format(date).length()-4));
         int patientYear = exact(new SimpleDateFormat("MMdd").format(date), dateOfBirth.replaceAll("/", ""));
-        patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
-
-        return currentYear - patientYear;
+        if(patientYear != 1000){
+            patientYear += Integer.parseInt(dateOfBirth.substring(dateOfBirth.length() - 4));
+            return currentYear - patientYear;
+        }
+        else{
+            return 1000;
+        }
     }
     private int exact(String monthDay, String DOB){
-        int patient = Integer.parseInt(DOB.substring(DOB.length() - 5));
-        int current = Integer.parseInt(monthDay);
-        return patient < current ? 1 : 0;
+        try{
+            int current = Integer.parseInt(monthDay);
+            int patient = Integer.parseInt(DOB.substring(DOB.length() - 5));
+            return patient < current ? 1 : 0;
+        }
+        catch(NumberFormatException e){
+            return 1000;
+        }
     }
     @Override
     public String toString(){

@@ -13,8 +13,8 @@ public class HistoryQueue {
     }
 
     private class Node{
-        private String status;
-        private String dateListed;
+        private final String status;
+        private final String dateListed;
         private Node next;
         private Node(String status, String dateListed){
             this.status = status;

@@ -7,4 +7,4 @@ Donette;Foller;34 Center St;Hamilton;Butler;OH;45011;513-570-1893;513-549-4561;d
 Simona;Morasca;3 Mcauley Dr;Ashland;Ashland;OH;44805;419-503-2484;419-800-6759;simona@morasca.com;6/27/2015;Status 1A;10/26/1989
 Mitsue;Tollner;7 Eads St;Chicago;Cook;IL;60632;773-573-6914;773-924-8565;mitsue_tollner@yahoo.com;2/18/2015;Status 1B;10/26/1989
 Leota;Dilliard;7 W Jackson Blvd;San Jose;Santa Clara;CA;95111;408-752-3500;408-813-1105;leota@hotmail.com;4/13/2015;;10/22/2006
-Sage;Wieser;5 Boston Ave #88;Sioux Falls;Minnehaha;SD;57105;605-414-2147;605-794-4895;sage_wieser@cox.net;1/22/2016;Status 2;10/25/1995
+Willow;Kusko;90991 Thorburn Ave;New York;New York;NY;10011;212-582-4976;212-934-5167;wkusko@yahoo.com;6/16/2016;Status 1A;10/26/1990
