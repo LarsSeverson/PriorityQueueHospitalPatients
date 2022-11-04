@@ -134,7 +134,7 @@ public class Patients {
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
         // more checks could be implemented like if the patientYear is an int
         if (dateOfBirth.length() < 4){
-            return 100;
+            return 1000;
         }
         int currentYear = Integer.parseInt(dateFormat.format(date).substring(dateFormat.format(date).length()-4));
         int patientYear = exact(new SimpleDateFormat("MMdd").format(date), dateOfBirth.replaceAll("/", ""));
